@@ -82,6 +82,10 @@ struct http_response
 */
 struct http_response* handle_redirect_get(struct http_response* hresp, char* custom_headers)
 {
+	if(hresp == NULL)
+	{
+		return NULL;
+	}
 	if(hresp->status_code_int > 300 && hresp->status_code_int < 399)
 	{
 		char *token = strtok(hresp->response_headers, "\r\n");
@@ -108,6 +112,10 @@ struct http_response* handle_redirect_get(struct http_response* hresp, char* cus
 */
 struct http_response* handle_redirect_head(struct http_response* hresp, char* custom_headers)
 {
+	if(hresp == NULL)
+	{
+		return NULL;
+	}
 	if(hresp->status_code_int > 300 && hresp->status_code_int < 399)
 	{
 		char *token = strtok(hresp->response_headers, "\r\n");
@@ -134,6 +142,10 @@ struct http_response* handle_redirect_head(struct http_response* hresp, char* cu
 */
 struct http_response* handle_redirect_post(struct http_response* hresp, char* custom_headers, char *post_data)
 {
+	if(hresp == NULL)
+	{
+		return NULL;
+	}
 	if(hresp->status_code_int > 300 && hresp->status_code_int < 399)
 	{
 		char *token = strtok(hresp->response_headers, "\r\n");
