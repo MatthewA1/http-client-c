@@ -175,7 +175,7 @@ struct http_response* http_req(char *http_headers, struct parsed_url *purl)
 	/* Parse url */
 	if(purl == NULL)
 	{
-		printf("Unable to parse url");
+		printf("Unable to parse url\n");
 		return NULL;
 	}
 
@@ -216,7 +216,7 @@ struct http_response* http_req(char *http_headers, struct parsed_url *purl)
   	}
 	else if(tmpres == 0)
   	{
-		printf("Not a valid IP");
+		printf("Not a valid IP\n");
     	return NULL;
   	}
 	remote->sin_port = htons(atoi(purl->port));
@@ -224,7 +224,7 @@ struct http_response* http_req(char *http_headers, struct parsed_url *purl)
 	/* Connect */
 	if(connect(sock, (struct sockaddr *)remote, sizeof(struct sockaddr)) < 0)
 	{
-	    printf("Could not connect");
+	    printf("Could not connect\n");
 		return NULL;
 	}
 
@@ -259,7 +259,7 @@ struct http_response* http_req(char *http_headers, struct parsed_url *purl)
 		#else
 			close(sock);
 		#endif
-        printf("Unabel to recieve");
+        printf("Unabel to recieve\n");
 		return NULL;
     }
 
@@ -312,7 +312,7 @@ struct http_response* http_get(char *url, char *custom_headers)
 	struct parsed_url *purl = parse_url(url);
 	if(purl == NULL)
 	{
-		printf("Unable to parse url");
+		printf("Unable to parse url\n");
 		return NULL;
 	}
 
@@ -391,7 +391,7 @@ struct http_response* http_post(char *url, char *custom_headers, char *post_data
 	struct parsed_url *purl = parse_url(url);
 	if(purl == NULL)
 	{
-		printf("Unable to parse url");
+		printf("Unable to parse url\n");
 		return NULL;
 	}
 
@@ -470,7 +470,7 @@ struct http_response* http_head(char *url, char *custom_headers)
 	struct parsed_url *purl = parse_url(url);
 	if(purl == NULL)
 	{
-		printf("Unable to parse url");
+		printf("Unable to parse url\n");
 		return NULL;
 	}
 
@@ -548,7 +548,7 @@ struct http_response* http_options(char *url)
 	struct parsed_url *purl = parse_url(url);
 	if(purl == NULL)
 	{
-		printf("Unable to parse url");
+		printf("Unable to parse url\n");
 		return NULL;
 	}
 
