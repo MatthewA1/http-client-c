@@ -35,8 +35,12 @@
 	#include <ws2tcpip.h>
 	#include <stdio.h>
 	#pragma comment(lib, "Ws2_32.lib")
-#elif _LINUX
+#elif __linux__
 	#include <sys/socket.h>
+	#include <netinet/in.h>
+	#include <netdb.h>
+	#include <arpa/inet.h>
+	#include <unistd.h>
 #elif __FreeBSD__
     #include <sys/socket.h>
     #include <netinet/in.h>
@@ -47,7 +51,7 @@
 #endif
 
 #include <errno.h>
-#include "stringx.h";
+#include "stringx.h"
 #include "urlparser.h"
 
 /*
