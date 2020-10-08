@@ -33,6 +33,7 @@
 #ifdef _WIN32
 	#include <winsock2.h>
 	#include <ws2tcpip.h>
+	#include <windows.h>
 	#include <stdio.h>
 	#pragma comment(lib, "Ws2_32.lib")
 #elif __linux__
@@ -53,6 +54,36 @@
 #include <errno.h>
 #include "stringx.h"
 #include "urlparser.h"
+
+#ifdef _WIN32
+int http_init()
+{
+	WORD wVersionRequested;
+    WSADATA wsaData;
+    int err;
+    wVersionRequested = MAKEWORD(2, 2);
+    err = WSAStartup(wVersionRequested, &wsaData);
+    if (err != 0) {
+        printf("WSAStartup failed with error: %d\n", err);
+    }
+	return err;
+}
+
+int http_cleanup()
+{
+	return WSACleanup();
+}
+#else
+int http_init()
+{
+	return 0;
+}
+
+int http_cleanup()
+{
+	return 0;
+}
+#endif
 
 /*
 	Prototype functions

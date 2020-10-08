@@ -69,8 +69,12 @@ char* hostname_to_ip(char *hostname)
 	char *ip = "0.0.0.0";
 	struct hostent *h;
 	if ((h=gethostbyname(hostname)) == NULL) 
-	{  
-		printf("gethostbyname");
+	{
+        #ifdef _WIN32
+        printf("Error with gethostbyname:\t%d\n", WSAGetLastError());
+        #else
+		printf("Error with gethostbyname\n");
+        #endif
 		return NULL;
 	}
 	return inet_ntoa(*((struct in_addr *)h->h_addr));
